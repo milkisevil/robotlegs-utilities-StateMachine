@@ -15,10 +15,12 @@ package org.robotlegs.utilities.statemachine
 		public static const CANCEL:String = "cancel";
 		
 		public var action:String;
-	    public var data:Object;
+		public var data:Object;
+		public var info:String;
 		
-		public function StateEvent(type:String, action:String = null, data:Object = null)
+		public function StateEvent(type:String, action:String = null, data:Object = null, info:String = null)
 		{
+			this.info = info;
 			this.action = action;
 			this.data = data;
 			super(type, false, false);
@@ -28,5 +30,11 @@ package org.robotlegs.utilities.statemachine
 		{
 			return new StateEvent(type, action, data);
 		}
+
+		override public function toString():String
+		{
+			return '[StateEvent type="'+type+'", action="'+action+'", info="'+info+'", data="'+data+'"]';
+		}
+
 	}
 }

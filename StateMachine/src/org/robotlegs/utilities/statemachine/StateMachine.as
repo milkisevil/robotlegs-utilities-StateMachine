@@ -100,7 +100,7 @@ package org.robotlegs.utilities.statemachine
 			canceled = false;
 				
 			// Exit the current State 
-			if ( _currentState && _currentState.exiting ) eventDispatcher.dispatchEvent( new StateEvent( _currentState.exiting, null, data ));
+			if ( _currentState && _currentState.exiting ) eventDispatcher.dispatchEvent( new StateEvent( _currentState.exiting.split(',')[0], null, data, _currentState.exiting.split(',')[1] )); 
 			
 			// Check to see whether the exiting guard has been canceled
 			if ( canceled ) {
@@ -109,7 +109,7 @@ package org.robotlegs.utilities.statemachine
 			}
 			
 			// Enter the next State 
-			if ( nextState.entering ) eventDispatcher.dispatchEvent( new StateEvent( nextState.entering, null, data )); 
+			if ( nextState.entering ) eventDispatcher.dispatchEvent( new StateEvent( nextState.entering.split(',')[0], null, data, nextState.entering.split(',')[1] )); 
 			
 			
 			// Check to see whether the entering guard has been canceled
@@ -122,7 +122,7 @@ package org.robotlegs.utilities.statemachine
 			_currentState = nextState;
 			
 			// Send the notification configured to be sent when this specific state becomes current 
-			if ( nextState.changed ) eventDispatcher.dispatchEvent( new StateEvent( _currentState.changed, null, data ));  
+			if ( nextState.changed ) eventDispatcher.dispatchEvent( new StateEvent( _currentState.changed.split(',')[0], null, data, _currentState.changed.split(',')[1] ));  
 
 			// Notify the app generally that the state changed and what the new state is 
 			eventDispatcher.dispatchEvent( new StateEvent( StateEvent.CHANGED, _currentState.name));
